@@ -1,7 +1,7 @@
-"use server";
+'use server';
 
-import { deleteSession } from "..";
+import { deleteSession } from '..';
 
 export const deleteSessionAction = async (): Promise<void> => {
-  await deleteSession(); // default namespace
+	await deleteSession(); // default namespace
 };

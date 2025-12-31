@@ -1,42 +1,34 @@
-"use server";
+'use server';
 
-import { setMany } from "@/utils/session/session-store";
+import { setMany } from '@/utils/session/session-store';
 
-export type CreateSessionActionState =
-  | { status: "idle" }
-  | { status: "success"; username: string }
-  | { status: "error"; message: string };
+export type CreateSessionActionState = { status: 'idle' } | { status: 'success'; username: string } | { status: 'error'; message: string };
 
-export const createSessionAction = async (
-  _prevState: CreateSessionActionState,
-  formData: FormData
-): Promise<CreateSessionActionState> => {
-  const username = String(formData.get("username") ?? "").trim();
-  const age = String(formData.get("age") ?? "unknown").trim();
-  const country = String(formData.get("country") ?? "unknown").trim();
+export const createSessionAction = async (_prevState: CreateSessionActionState, formData: FormData): Promise<CreateSessionActionState> => {
+	const username = String(formData.get('username') ?? '').trim();
+	const age = String(formData.get('age') ?? 'unknown').trim();
+	const country = String(formData.get('country') ?? 'unknown').trim();
 
-  // Handle JSON array from form preferences checkboxes
-  const formPreferences = formData.getAll("preferences").map(String);
-  const preferences: Record<string, boolean> = {};
+	// Handle JSON array from form preferences checkboxes
+	const formPreferences = formData.getAll('preferences').map(String);
+	const preferences: Record<string, boolean> = {};
 
-  console.log("Preferences:", formPreferences);
+	if (!username) {
+		return { status: 'error', message: 'Username is required.' };
+	}
 
-  if (!username) {
-    return { status: "error", message: "Username is required." };
-  }
+	if (formPreferences.length > 0) {
+		formPreferences.forEach((pref) => {
+			preferences[pref] = true;
+		});
+	}
 
-  if (formPreferences.length > 0) {
-    formPreferences.forEach((pref) => {
-      preferences[pref] = true;
-    });
-  }
+	await setMany({
+		username,
+		age,
+		country,
+		preferences: JSON.stringify(preferences),
+	});
 
-  await setMany({
-    username,
-    age,
-    country,
-    preferences: JSON.stringify(preferences),
-  });
-
-  return { status: "success", username };
+	return { status: 'success', username };
 };

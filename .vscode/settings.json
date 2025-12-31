@@ -1,0 +1,43 @@
+{
+	"css.customData": [".vscode/tailwind-fix.json"],
+	"scss.lint.unknownAtRules": "ignore",
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnSave": true,
+	"editor.tabSize": 4,
+	"editor.codeActionsOnSave": {
+		"source.addMissingImports": "explicit",
+		"source.fixAll": "explicit",
+		"source.organizeImports": "explicit",
+		"source.sortMembers": "explicit"
+	},
+	"files.exclude": {
+		"**/certificates/**": true,
+		"**/node_modules/**": true,
+		"**/.clinic/**": true,
+		"**/.next/**": true
+	},
+	"files.eol": "\n",
+	"workbench.editor.customLabels.patterns": {
+		"**/app/**/page.tsx": "${dirname} <page.${extname}>",
+		"**/app/**/layout.tsx": "${dirname} <layout.${extname}>",
+		"**/app/**/loading.tsx": "${dirname} <loading.${extname}>",
+		"**/app/**/not-found.tsx": "${dirname} <not-found.${extname}>",
+		"**/app/**/route.ts": "${dirname} <route.${extname}>",
+		"**/_components/**/**.ts*": "${filename}.${extname} <${dirname(1)}/${dirname}>",
+		"**/components/**/**.ts*": "${filename}.${extname} <${dirname} />"
+	},
+	"tailwindCSS.lint.cssConflict": "ignore",
+	"typescript.tsserver.experimental.enableProjectDiagnostics": true,
+	"typescript.tsdk": "node_modules/typescript/lib",
+	// Ensure JSON files use tabs and not spaces
+	"[json]": {
+		"editor.insertSpaces": false,
+		"editor.tabSize": 4
+	},
+	"[dockerfile]": {
+		"editor.defaultFormatter": "ms-azuretools.vscode-containers"
+	},
+	"[properties]": {
+		"editor.defaultFormatter": "foxundermoon.shell-format"
+	} // Enable TS errors without openning the file. Experimental feature but useful.
+}
