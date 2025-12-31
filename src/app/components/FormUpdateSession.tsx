@@ -3,15 +3,22 @@
 import { countryList } from '@/utils/helpers/countrylist';
 import { useSession } from '@/utils/providers/SessionProvider';
 import { updateSessionAction, UpdateSessionActionState } from '@/utils/session/crud/session-update-action';
-import { useActionState, useState } from 'react';
+import { useActionState, useEffect, useState } from 'react';
 import { Preferences } from './Preferences';
 
 const initialState: UpdateSessionActionState = { status: 'idle' };
 
 export const FormUpdateSession = () => {
 	const [state, action, isPending] = useActionState(updateSessionAction, initialState);
+	const { session, setSession } = useSession();
 
-	const { session } = useSession();
+	useEffect(() => {
+		if (state && state.status === 'success' && state.session) {
+			console.log('Setting session in provider:', state.session);
+
+			setSession(state);
+		}
+	}, [state, setSession]);
 
 	// Default values
 	const hasSession = session.status === 'success' && 'session' in session;
@@ -22,12 +29,11 @@ export const FormUpdateSession = () => {
 	const [country, setCountry] = useState<string | undefined>(undefined);
 	const value = country ?? defaultCountry;
 
-	console.log('Current session from provider:', session);
-
 	return (
 		<form action={action} className="flex flex-col items-center gap-3 w-full max-w-xs lg:min-w-xs border border-gray-800 rounded-md p-4">
 			<p className="text-lg font-semibold">Update session</p>
 
+			{/* Username */}
 			<input
 				type="text"
 				name="username"
@@ -38,6 +44,7 @@ export const FormUpdateSession = () => {
 				defaultValue={defaultValue?.username}
 			/>
 
+			{/* Age */}
 			<input
 				type="number"
 				name="age"
@@ -59,6 +66,7 @@ export const FormUpdateSession = () => {
 				disabled={isPending}
 			>
 				<option value="">{`Select a country (optional)`}</option>
+
 				{countryList.map((country) => (
 					<option key={country.value} value={country.value}>
 						{country.label}

@@ -1,9 +1,14 @@
 'use server';
 
 import { getSessionId, redis } from '@/utils/session'; // ajuste le chemin
+import { SessionData } from './session-create-action';
 // ou utilise tes helpers si tu en as (mais ici on évite getSessionIdAndCreateIfMissing)
 
-export type UpdateSessionActionState = { status: 'idle' } | { status: 'success' } | { status: 'error'; message: string };
+export type UpdateSessionActionState =
+	| { status: 'idle' }
+	| { status: 'empty'; message?: string }
+	| { status: 'error'; message: string }
+	| { status: 'success'; session: SessionData };
 
 export const updateSessionAction = async (_prev: UpdateSessionActionState, formData: FormData, namespace: string = ''): Promise<UpdateSessionActionState> => {
 	const sessionId = await getSessionId();
@@ -30,5 +35,5 @@ export const updateSessionAction = async (_prev: UpdateSessionActionState, formD
 
 	await redis.hset(`session-${namespace}-${sessionId}`, updates);
 
-	return { status: 'success' };
+	return { status: 'success', session: { username, age, country, preferences: {} } };
 };
