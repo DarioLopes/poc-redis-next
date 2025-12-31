@@ -23,8 +23,8 @@
 		"**/app/**/loading.tsx": "${dirname} <loading.${extname}>",
 		"**/app/**/not-found.tsx": "${dirname} <not-found.${extname}>",
 		"**/app/**/route.ts": "${dirname} <route.${extname}>",
-		"**/_components/**/**.ts*": "${filename}.${extname} <${dirname(1)}/${dirname}>",
-		"**/components/**/**.ts*": "${filename}.${extname} <${dirname} />"
+		"**/_components/**/**.ts*": "${dirname(1)}/${dirname} | <${filename}.${extname}/>",
+		"**/components/**/**.ts*": "${dirname} | <${filename}.${extname} />"
 	},
 	"tailwindCSS.lint.cssConflict": "ignore",
 	"typescript.tsserver.experimental.enableProjectDiagnostics": true,

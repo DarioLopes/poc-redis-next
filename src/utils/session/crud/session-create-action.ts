@@ -2,7 +2,22 @@
 
 import { setMany } from '@/utils/session/session-store';
 
-export type CreateSessionActionState = { status: 'idle' } | { status: 'success'; username: string } | { status: 'error'; message: string };
+export type SessionData = {
+	username: string;
+	age: string;
+	country: string;
+	preferences: {
+		offers?: boolean;
+		newsletters?: boolean;
+		updates?: boolean;
+	};
+};
+
+export type CreateSessionActionState =
+	| { status: 'idle' }
+	| { status: 'empty'; message?: string }
+	| { status: 'error'; message: string }
+	| { status: 'success'; session: SessionData };
 
 export const createSessionAction = async (_prevState: CreateSessionActionState, formData: FormData): Promise<CreateSessionActionState> => {
 	const username = String(formData.get('username') ?? '').trim();
@@ -13,9 +28,9 @@ export const createSessionAction = async (_prevState: CreateSessionActionState, 
 	const formPreferences = formData.getAll('preferences').map(String);
 	const preferences: Record<string, boolean> = {};
 
-	if (!username) {
-		return { status: 'error', message: 'Username is required.' };
-	}
+	console.log('Form preferences selected:', formPreferences);
+
+	if (!username) return { status: 'error', message: 'Username is required.' };
 
 	if (formPreferences.length > 0) {
 		formPreferences.forEach((pref) => {
@@ -30,5 +45,5 @@ export const createSessionAction = async (_prevState: CreateSessionActionState, 
 		preferences: JSON.stringify(preferences),
 	});
 
-	return { status: 'success', username };
+	return { status: 'success', session: { username, age, country, preferences } };
 };

@@ -36,12 +36,17 @@ export async function getSessionIdAndCreateIfMissing(): Promise<SessionId> {
 	return sessionId;
 }
 
-export async function deleteSession(namespace: string = ''): Promise<void> {
+export async function deleteSession(namespace: string = ''): Promise<{ status: 'success' | 'empty'; message: string }> {
 	const sessionId = await getSessionId();
-	if (!sessionId) return;
+	if (!sessionId) return { status: 'empty', message: 'No session to delete.' };
 
 	await redis.del(`session-${namespace}-${sessionId}`);
 
 	const cookieStore = await cookies();
 	cookieStore.delete('session-id'); // supprime le cookie (path "/" par défaut)
+
+	return {
+		status: 'empty',
+		message: 'Session deleted successfully.',
+	};
 }

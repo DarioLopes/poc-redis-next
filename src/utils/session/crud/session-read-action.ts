@@ -2,19 +2,24 @@
 
 import { getAll } from '@/utils/session/session-store';
 import { deleteSession } from '..';
+import { SessionData } from './session-create-action';
 
-export type ReadSessionActionState = { status: 'idle' } | { status: 'empty' } | { status: 'success'; data: Record<string, string> };
+export type ReadSessionActionState =
+	| { status: 'idle' }
+	| { status: 'empty'; message?: string }
+	| { status: 'error'; message: string }
+	| { status: 'success'; session: SessionData };
 
 export const readSessionAction = async (): Promise<ReadSessionActionState> => {
-	const sessionData = await getAll();
+	const sessionData = (await getAll()) as SessionData | null;
 
 	if (!sessionData || Object.keys(sessionData).length === 0) {
 		await deleteSession();
-		return { status: 'empty' };
+		return { status: 'empty', message: 'No session data found.' };
 	}
 
 	return {
 		status: 'success',
-		data: sessionData,
+		session: sessionData,
 	};
 };

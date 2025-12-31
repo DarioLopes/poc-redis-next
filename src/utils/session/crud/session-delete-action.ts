@@ -2,6 +2,6 @@
 
 import { deleteSession } from '..';
 
-export const deleteSessionAction = async (): Promise<void> => {
-	await deleteSession(); // default namespace
+export const deleteSessionAction = async (): Promise<{ status: 'success' | 'empty'; message: string }> => {
+	return await deleteSession(); // default namespace
 };
