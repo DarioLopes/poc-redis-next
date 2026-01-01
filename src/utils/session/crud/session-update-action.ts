@@ -47,8 +47,6 @@ export const updateSessionAction = async (_prev: UpdateSessionActionState, formD
 		return { status: 'error', message: 'Nothing to update.' };
 	}
 
-	// console.log('Updating session with ID:', sessionId, 'with data:', updates);
-
 	await redis.hset(`session-${namespace}-${sessionId}`, updates);
 
 	return { status: 'success', session: { username, age, country, preferences } };
