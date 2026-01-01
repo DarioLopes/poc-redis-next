@@ -13,11 +13,7 @@ export const FormUpdateSession = () => {
 	const { session, setSession } = useSession();
 
 	useEffect(() => {
-		if (state && state.status === 'success' && state.session) {
-			console.log('Setting session in provider:', state.session);
-
-			setSession(state);
-		}
+		if (state && state.status === 'success' && state.session) setSession(state);
 	}, [state, setSession]);
 
 	// Default values

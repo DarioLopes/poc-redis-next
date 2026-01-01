@@ -9,7 +9,11 @@ export const Preferences = () => {
 	const { session } = useSession();
 
 	const hasSession = session.status === 'success' && 'session' in session;
-	const defaults = hasSession ? session.session?.preferences : undefined;
+	const defaults = hasSession
+		? typeof session.session?.preferences === 'string' && session.session?.preferences !== '[object Object]'
+			? JSON.parse(session.session?.preferences ?? '{}')
+			: session.session?.preferences
+		: {};
 
 	// undefined = not touched yet
 	const [prefs, setPrefs] = useState<Partial<Record<PrefKey, boolean>> | undefined>(undefined);
@@ -28,7 +32,8 @@ export const Preferences = () => {
 			<label>
 				<input
 					type="checkbox"
-					name="preferences.newsletters"
+					name="preferences"
+					value="newsletters"
 					checked={getValue('newsletters')}
 					onChange={(e) => setValue('newsletters', e.target.checked)}
 					className="mr-2"
@@ -37,12 +42,12 @@ export const Preferences = () => {
 			</label>
 
 			<label>
-				<input type="checkbox" name="preferences.updates" checked={getValue('updates')} onChange={(e) => setValue('updates', e.target.checked)} className="mr-2" />
+				<input type="checkbox" name="preferences" value="updates" checked={getValue('updates')} onChange={(e) => setValue('updates', e.target.checked)} className="mr-2" />
 				Product Updates
 			</label>
 
 			<label>
-				<input type="checkbox" name="preferences.offers" checked={getValue('offers')} onChange={(e) => setValue('offers', e.target.checked)} className="mr-2" />
+				<input type="checkbox" name="preferences" value="offers" checked={getValue('offers')} onChange={(e) => setValue('offers', e.target.checked)} className="mr-2" />
 				Special Offers
 			</label>
 		</div>

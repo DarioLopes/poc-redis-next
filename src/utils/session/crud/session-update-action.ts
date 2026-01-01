@@ -12,6 +12,7 @@ export type UpdateSessionActionState =
 
 export const updateSessionAction = async (_prev: UpdateSessionActionState, formData: FormData, namespace: string = ''): Promise<UpdateSessionActionState> => {
 	const sessionId = await getSessionId();
+
 	if (!sessionId) {
 		return {
 			status: 'error',
@@ -23,17 +24,32 @@ export const updateSessionAction = async (_prev: UpdateSessionActionState, formD
 	const age = String(formData.get('age') ?? '').trim();
 	const country = String(formData.get('country') ?? '').trim();
 
+	// Handle JSON array from form preferences checkboxes
+	const formPreferences = formData.getAll('preferences').map(String);
+	const preferences = {} as SessionData['preferences'];
+
+	if (formPreferences.length > 0) {
+		formPreferences.forEach((pref) => {
+			preferences[pref as keyof SessionData['preferences']] = true;
+		});
+	}
+
+	console.log('Preferences to update:', formPreferences, preferences);
+
 	// Update only provided fields
-	const updates: Record<string, string> = {};
+	const updates = {} as Partial<SessionData>;
 	if (username) updates.username = username;
 	if (age) updates.age = age;
 	if (country) updates.country = country;
+	if (Object.keys(preferences).length > 0) updates.preferences = JSON.stringify(preferences) as SessionData['preferences'];
 
 	if (Object.keys(updates).length === 0) {
 		return { status: 'error', message: 'Nothing to update.' };
 	}
 
+	console.log('Updating session with ID:', sessionId, 'with data:', updates);
+
 	await redis.hset(`session-${namespace}-${sessionId}`, updates);
 
-	return { status: 'success', session: { username, age, country, preferences: {} } };
+	return { status: 'success', session: { username, age, country, preferences } };
 };

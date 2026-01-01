@@ -12,11 +12,7 @@ export const FormCreateSession = () => {
 	const { setSession } = useSession();
 
 	useEffect(() => {
-		if (state && state.status === 'success' && state.session) {
-			console.log('Setting session in provider:', state.session);
-
-			setSession(state);
-		}
+		if (state && state.status === 'success' && state.session) setSession(state);
 	}, [state, setSession]);
 
 	return (
@@ -58,15 +54,18 @@ export const FormCreateSession = () => {
 			{/* Preferences checkboxes group */}
 			<div className="flex flex-col mb-4 w-full">
 				<label className="mb-2 font-medium">Preferences:</label>
+
 				<div className="flex flex-col space-y-2">
 					<label>
 						<input type="checkbox" name="preferences" value="newsletters" className="mr-2" disabled={isPending} />
 						Newsletters
 					</label>
+
 					<label>
 						<input type="checkbox" name="preferences" value="updates" className="mr-2" disabled={isPending} />
 						Product Updates
 					</label>
+
 					<label>
 						<input type="checkbox" name="preferences" value="offers" className="mr-2" disabled={isPending} />
 						Special Offers

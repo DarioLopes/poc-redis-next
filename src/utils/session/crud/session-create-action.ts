@@ -28,8 +28,6 @@ export const createSessionAction = async (_prevState: CreateSessionActionState, 
 	const formPreferences = formData.getAll('preferences').map(String);
 	const preferences: Record<string, boolean> = {};
 
-	console.log('Form preferences selected:', formPreferences);
-
 	if (!username) return { status: 'error', message: 'Username is required.' };
 
 	if (formPreferences.length > 0) {

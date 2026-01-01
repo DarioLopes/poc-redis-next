@@ -12,8 +12,6 @@ export const FormReadSession = () => {
 
 	const { session } = useSession();
 
-	console.log('Current session from provider:', session);
-
 	return (
 		<form action={action} className="flex flex-col items-center gap-3 w-full max-w-xs lg:min-w-xs border border-gray-800 rounded-md p-4">
 			<button type="submit" disabled={isPending} className="bg-gray-800 mb-2 text-white px-4 py-2 rounded disabled:opacity-60 w-full" onClick={() => setHasClicked(true)}>
@@ -31,7 +29,7 @@ export const FormReadSession = () => {
 					<ul className="text-sm space-y-1">
 						{Object.entries(session.session).map(([key, value]) => (
 							<li key={key}>
-								<span className="font-mono text-gray-600">{key}</span>:{' '}
+								<span className="font-mono text-gray-600">{key}: </span>
 								<span className="font-semibold">{typeof value === 'string' ? value : JSON.stringify(value)}</span>
 							</li>
 						))}
@@ -52,8 +50,8 @@ export const FormReadSession = () => {
 					<ul className="text-sm space-y-1">
 						{Object.entries(state.session).map(([key, value]) => (
 							<li key={key}>
-								<span className="font-mono text-gray-600">{key}</span>:{' '}
-								<span className="font-semibold">{typeof value === 'string' ? value : JSON.stringify(value)}</span>
+								<span className="font-mono text-gray-600">{key}: </span>
+								<span className="font-semibold">{value === '[object Object]' ? value : typeof value === 'string' ? value : JSON.stringify(value)}</span>
 							</li>
 						))}
 					</ul>
