@@ -4,6 +4,7 @@ import { countryList } from '@/utils/helpers/countrylist';
 import { useSession } from '@/utils/providers/SessionProvider';
 import { createSessionAction, CreateSessionActionState } from '@/utils/session/crud/session-create-action';
 import { useActionState, useEffect } from 'react';
+import { Title } from './Title';
 
 const initialState: CreateSessionActionState = { status: 'idle' };
 
@@ -17,6 +18,8 @@ export const FormCreateSession = () => {
 
 	return (
 		<form action={formAction} className="flex flex-col items-center w-full max-w-xs lg:min-w-xs border border-gray-800 rounded-md p-4">
+			<Title>Create</Title>
+
 			{/* Username */}
 			<input
 				required

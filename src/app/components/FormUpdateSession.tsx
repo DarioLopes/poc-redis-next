@@ -5,6 +5,7 @@ import { useSession } from '@/utils/providers/SessionProvider';
 import { updateSessionAction, UpdateSessionActionState } from '@/utils/session/crud/session-update-action';
 import { useActionState, useEffect, useState } from 'react';
 import { Preferences } from './Preferences';
+import { Title } from './Title';
 
 const initialState: UpdateSessionActionState = { status: 'idle' };
 
@@ -27,7 +28,7 @@ export const FormUpdateSession = () => {
 
 	return (
 		<form action={action} className="flex flex-col items-center gap-3 w-full max-w-xs lg:min-w-xs border border-gray-800 rounded-md p-4">
-			<p className="text-lg font-semibold">Update session</p>
+			<Title>Update</Title>
 
 			{/* Username */}
 			<input
