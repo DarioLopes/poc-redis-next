@@ -9,11 +9,7 @@ export const Preferences = () => {
 	const { session } = useSession();
 
 	const hasSession = session.status === 'success' && 'session' in session;
-	const defaults = hasSession
-		? typeof session.session?.preferences === 'string' && session.session?.preferences !== '[object Object]'
-			? JSON.parse(session.session?.preferences ?? '{}')
-			: session.session?.preferences
-		: {};
+	const defaults = hasSession ? (typeof session.session?.preferences === 'string' ? JSON.parse(session.session?.preferences ?? '{}') : session.session?.preferences) : {};
 
 	// undefined = not touched yet
 	const [prefs, setPrefs] = useState<Partial<Record<PrefKey, boolean>> | undefined>(undefined);

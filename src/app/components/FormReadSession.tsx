@@ -51,7 +51,7 @@ export const FormReadSession = () => {
 						{Object.entries(state.session).map(([key, value]) => (
 							<li key={key}>
 								<span className="font-mono text-gray-600">{key}: </span>
-								<span className="font-semibold">{value === '[object Object]' ? value : typeof value === 'string' ? value : JSON.stringify(value)}</span>
+								<span className="font-semibold">{typeof value === 'string' ? value : JSON.stringify(value)}</span>
 							</li>
 						))}
 					</ul>
