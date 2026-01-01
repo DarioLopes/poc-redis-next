@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Session POC (Redis)
 
-## Getting Started
+This project is a **proof of concept** demonstrating a session-based authentication and state management flow using **Next.js App Router** and **Redis**.
 
-First, run the development server:
+The goal is to validate:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- server-side session storage with Redis
+- a minimal, secure session model
+- controlled exposure of session data to the client
+- compatibility with multiple Next.js instances
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This is **not a production-ready system**, but a functional exploration of architecture choices.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Stack
 
-## Learn More
+### Frontend
 
-To learn more about Next.js, take a look at the following resources:
+- **Next.js 16 (App Router)**
+- **TypeScript**
+- **Tailwind CSS**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Backend / Infrastructure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Redis** (session store)
+- **Server Actions** (no REST auth endpoints)
+- **HTTP-only cookies** for session identification
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## High-Level Architecture
