@@ -22,7 +22,7 @@ export const FormReadSession = () => {
 			</button>
 
 			{hasClicked && session.status !== 'empty' && state.status === 'success' && (
-				<div className="rounded-lg border border-gray-800 p-4 w-full max-w-sm overflow-scroll">
+				<div className="rounded-lg border border-gray-800 p-4 w-full max-w-sm overflow-x-scroll [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-800 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-800 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
 					<button type="button" onClick={() => setHasClicked(false)} className="text-xs text-red-500 underline mb-2 w-fit ml-auto inline-block">
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="size-4" viewBox="0 0 16 16">
 							<path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
@@ -47,7 +47,7 @@ export const FormReadSession = () => {
 			{session.status === 'empty' && <p className="text-gray-500">No session data found.</p>}
 
 			{session.status === 'success' && (
-				<div className="mt-2 rounded-lg border border-gray-800 p-4 w-full max-w-sm overflow-scroll">
+				<div className="mt-2 rounded-lg border border-gray-800 p-4 w-full max-w-sm overflow-x-scroll [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-800 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-800 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
 					<p className="font-semibold mb-2">Session values</p>
 
 					<ul className="text-sm space-y-1">
