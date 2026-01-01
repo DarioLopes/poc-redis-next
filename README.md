@@ -1,4 +1,4 @@
-![Next-Redis](./public/github/next-redis.png)
+![Next-Redis](./public/next-redis.png)
 
 # Next.js Session POC (Redis)
 
@@ -56,7 +56,7 @@ At first launch:
     - **Password:** `______` (empty)
 4. Save and connect
 
-No security is applied here — this setup is **strictly local**, for development
+No security is applied here — again, this setup is **strictly local**, for development
 and inspection purposes only.
 
 ---
@@ -109,7 +109,7 @@ Example:
   age: 34,
   country: "Portugal"
   preferences: {
-    // any false preference (offer, newsletters, updates)
+    // any false preference (offers, newsletters, updates)
     // is simply removed from the preferences object, not set to false.
     offers: true,
     newsletters: true,
