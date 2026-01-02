@@ -23,7 +23,9 @@ export const SessionProvider = ({ initialSession, children }: { initialSession: 
 
 		if (initialSession.status === 'empty') {
 			didCleanupRef.current = true;
-			deleteSessionAction(); // trigger session deletion on the server side - useful when session is deleted manually on Redis side
+			// trigger session deletion on the server side
+			// useful when session is deleted manually on Redis insights or CLI
+			deleteSessionAction();
 		}
 	}, [initialSession.status]);
 
