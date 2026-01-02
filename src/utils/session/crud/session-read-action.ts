@@ -1,7 +1,6 @@
 'use server';
 
 import { getAll } from '@/utils/session/session-store';
-import { deleteSession } from '..';
 import { SessionData } from './session-create-action';
 
 export type ReadSessionActionState =
@@ -13,10 +12,7 @@ export type ReadSessionActionState =
 export const readSessionAction = async (): Promise<ReadSessionActionState> => {
 	const sessionData = (await getAll()) as SessionData | null;
 
-	if (!sessionData || Object.keys(sessionData).length === 0) {
-		await deleteSession();
-		return { status: 'empty', message: 'No session data found.' };
-	}
+	if (!sessionData || Object.keys(sessionData).length === 0) return { status: 'empty', message: 'No session data found.' };
 
 	return {
 		status: 'success',

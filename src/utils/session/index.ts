@@ -43,7 +43,7 @@ export async function deleteSession(namespace: string = ''): Promise<{ status: '
 	await redis.del(`session-${namespace}-${sessionId}`);
 
 	const cookieStore = await cookies();
-	cookieStore.delete('session-id'); // supprime le cookie (path "/" par défaut)
+	cookieStore.delete('session-id'); // Remove session-id http only cookie
 
 	return {
 		status: 'empty',

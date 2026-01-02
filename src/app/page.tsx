@@ -1,7 +1,7 @@
-import { FormCreateSession } from './components/FormCreateSession';
-import { FormDeleteSession } from './components/FormDeleteSession';
-import { FormReadSession } from './components/FormReadSession';
-import { FormUpdateSession } from './components/FormUpdateSession';
+import { FormCreateSession } from '../components/FormCreateSession';
+import { FormDeleteSession } from '../components/FormDeleteSession';
+import { FormReadSession } from '../components/FormReadSession';
+import { FormUpdateSession } from '../components/FormUpdateSession';
 
 export default function Home() {
 	return (
