@@ -33,6 +33,8 @@ This is **not a production-ready system**, but a functional exploration of archi
 
 This POC is designed to run **entirely in local development**.
 
+> Before running, **copy** and rename `env.example` to `.env.local`. Do not remove or rename env.example directly!
+
 ### Application
 
 - **App URL:** http://localhost:3000  
