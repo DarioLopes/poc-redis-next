@@ -37,17 +37,15 @@ This POC is designed to run **entirely in local development**.
 
 ### Application
 
-- **App URL:** http://localhost:3000  
-  Main Next.js application (App Router).
+- **App URL:** http://localhost:3000
+    - Main Next.js application (App Router).
 
 ### Redis Insight
 
 - **Redis Insight URL:** http://localhost:5540
+    - Redis Insight is a **local UI tool** to inspect and debug Redis data (keys, TTL, values, memory usage, etc.).
 
-Redis Insight is a **local UI tool** to inspect and debug Redis data
-(keys, TTL, values, memory usage, etc.).
-
-At first launch:
+### At first launch
 
 1. Open Redis Insight
 2. Create a new database
